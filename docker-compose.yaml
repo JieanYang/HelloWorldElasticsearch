@@ -9,6 +9,9 @@ services:
       # - discovery.type=single-node
       - discovery.seed_hosts=['127.0.0.1', '[::1]']
       - xpack.security.enabled=false
+      # 跨域 CORS 问题设置 (未验证)
+      # - http.cors.enabled=true
+      # - http.cors.allow-origin='*'
     volumes:
       - "es-data-es01:/usr/share/elasticsearch/data"
   # kibana:
