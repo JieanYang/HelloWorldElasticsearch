@@ -6,8 +6,8 @@ services:
       - "9200:9200"
       - "9300:9300"
     environment:
-      # ! Dev settings
-      - discovery.type=single-node
+      # - discovery.type=single-node
+      - discovery.seed_hosts=['127.0.0.1', '[::1]']
       - xpack.security.enabled=false
     volumes:
       - "es-data-es01:/usr/share/elasticsearch/data"
