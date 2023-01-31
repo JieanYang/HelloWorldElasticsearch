@@ -13,23 +13,23 @@ services:
   #     # - http.cors.enabled=true
   #     # - http.cors.allow-origin='*'
   #   volumes:
-  #     - "elasticSearch_data:/usr/share/elasticsearch/data"
+  #     - "elasticSearch_data-1:/usr/share/elasticsearch/data"
   # # kibana:
   # #   image: docker.elastic.co/kibana/kibana:8.6.0
   # #   ports:
   # #     - "5601:5601"
 
   elasticSearch:
-    container_name: elasticSearch
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.6.0
+    container_name: elasticSearch-1
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
     ports:
       - "9200:9200"
       - "9300:9300"
-    # environment:
-    # # ! Dev settings
-    # - discovery.type=single-node
-    # - xpack.security.enabled=false
+    environment:
+      # ! Dev settings
+      - discovery.type=single-node
+      - xpack.security.enabled=false
     volumes:
-      - elasticSearch_data:/usr/share/elasticsearch/data
+      - elasticSearch_data-1:/usr/share/elasticsearch/data
 volumes:
-  elasticSearch_data:
+  elasticSearch_data-1:
