@@ -1,27 +1,15 @@
 version: "3.0"
 services:
-  # es01:
-  #   image: docker.elastic.co/elasticsearch/elasticsearch:8.6.0
-  #   ports:
-  #     - "9200:9200"
-  #     - "9300:9300"
-  #   environment:
-  #     # - discovery.type=single-node
-  #     - discovery.seed_hosts=['127.0.0.1', '[::1]']
-  #     - xpack.security.enabled=false
-  #     # 跨域 CORS 问题设置 (未验证)
-  #     # - http.cors.enabled=true
-  #     # - http.cors.allow-origin='*'
-  #   volumes:
-  #     - "elasticSearch_data-1:/usr/share/elasticsearch/data"
-  # # kibana:
-  # #   image: docker.elastic.co/kibana/kibana:8.6.0
-  # #   ports:
-  # #     - "5601:5601"
-
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:7.10.0
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticSearch
   elasticSearch:
-    container_name: elasticSearch-1
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+    container_name: elasticSearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.0
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -30,6 +18,7 @@ services:
       - discovery.type=single-node
       - xpack.security.enabled=false
     volumes:
-      - elasticSearch_data-1:/usr/share/elasticsearch/data
+      - elasticSearch_data:/usr/share/elasticsearch/data
+
 volumes:
-  elasticSearch_data-1:
+  elasticSearch_data:
